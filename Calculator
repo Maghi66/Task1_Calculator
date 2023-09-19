@@ -1,0 +1,66 @@
+"""
+Created on Tue Aug 22 16:18:44 2023
+
+@author: Maghi Haidar
+"""
+
+import tkinter as tk
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y != 0:
+        return x / y
+    else:
+        return "Cannot divide by zero"
+
+def calculate():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
+    choice = operation_var.get()
+
+    if choice == "Add":
+        result = add(num1, num2)
+    elif choice == "Subtract":
+        result = subtract(num1, num2)
+    elif choice == "Multiply":
+        result = multiply(num1, num2)
+    elif choice == "Divide":
+        result = divide(num1, num2)
+    else:
+        result = "Invalid operation"
+
+    result_label.config(text=f"Result: {result}")
+
+# Create the main application window
+root = tk.Tk()
+root.title("Simple Calculator")
+
+# Create and place widgets
+entry_num1 = tk.Entry(root)
+entry_num1.pack(pady=10)
+
+operation_var = tk.StringVar()
+operation_choices = ["Add", "Subtract", "Multiply", "Divide"]
+operation_var.set("Add")
+operation_menu = tk.OptionMenu(root, operation_var, *operation_choices)
+operation_menu.pack()
+
+entry_num2 = tk.Entry(root)
+entry_num2.pack(pady=10)
+
+calculate_button = tk.Button(root, text="Calculate", command=calculate)
+calculate_button.pack()
+
+result_label = tk.Label(root, text="Result: ")
+result_label.pack()
+
+# Start the main event loop
+root.mainloop()
